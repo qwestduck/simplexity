@@ -8,6 +8,8 @@ typedef int color_t;
 #define PLAYER_WHITE 1
 #define STATUS_OK    0
 
+extern bool _seeded;
+
 class Player {
 public:
   Player();
