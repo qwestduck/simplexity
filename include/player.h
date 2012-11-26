@@ -2,11 +2,7 @@
 #define PLAYER_H
 
 #include "board.h"
-
-typedef int color_t;
-#define PLAYER_RED   0
-#define PLAYER_WHITE 1
-#define STATUS_OK    0
+#include "common.h"
 
 extern bool _seeded;
 

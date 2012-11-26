@@ -2,9 +2,8 @@
 #define GAME_H
 
 #include "board.h"
+#include "common.h"
 #include "player.h"
-
-typedef int player_t;
 
 class Game {
 public:
