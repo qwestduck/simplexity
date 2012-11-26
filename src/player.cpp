@@ -13,5 +13,5 @@ RandomPlayer::RandomPlayer(Board* board, color_t color) {
 }
 
 status_t RandomPlayer::move() {
-
+  return STATUS_OK;
 }

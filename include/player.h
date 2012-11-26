@@ -6,6 +6,7 @@
 typedef int color_t;
 #define PLAYER_RED   0
 #define PLAYER_WHITE 1
+#define STATUS_OK    0
 
 class Player {
 public:
