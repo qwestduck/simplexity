@@ -14,10 +14,11 @@ void Game::play() {
 
       switch(_board->check()) {
       case STATUS_VICTORY:
-        std::cout << "Victory: Player " << player << std::endl;
+        std::cout << "Victory: Player " << player << ", Moves: " << _board->getMoves() << std::endl;
         gameOver = true;
         break;
       case STATUS_CAT:
+        std::cout << "CAT, Moves: " << _board->getMoves() << std::endl;
         gameOver = true;
         break;
       }
