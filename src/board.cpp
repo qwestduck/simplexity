@@ -29,43 +29,56 @@ Board::Board() {
   _moves = 0;
 }
 
-bool Board::_check_aux(piece_t** file) {
-  int and_check = 0xFF;
-  int or_check  = 0x00;
-
-  for(int i = 0; i < 4; i++) {
-    for(int j = 0; j < 4; j++)
-      if(!*(file + i + j)) return false;
-
-    for(int j = 0; j < 4; j++) {
-      and_check &= **(file + i + j);
-      or_check  |= **(file + i + j);
-    }
-
-    if(((and_check & 0xF0) == (or_check & 0xF0)) || ((and_check & 0x0F) == (or_check & 0x0F))) return true;
-  }
-
-  return false;
-}
-
 status_t Board::check() {
   int r = _recentMove;
   int z = _poles[_recentMove].getZ() - 1;
 
-  piece_t* column[7];
-  piece_t* row[7];
-  piece_t* diag1[7];
-  piece_t* diag2[7];
+  int* file[4];
+  int color_counter[4];
+  int shape_counter[4];
+  int prev_color[4];
+  int prev_shape[4];
 
-  for(int i = -3; i <= 3; i++) {
-    column[i + 3] = read(r, z + i);
-    row[i + 3]    = read(r + i, z);
-    diag1[i + 3]  = read(r + i, z + i);
-    diag2[i + 3]  = read(r + i, z - i);
+  for(int i = 0; i < 7; i++) {
+    file[0] = read(r + i - 3, z);
+    file[1] = read(r, z + i - 3);
+    file[2] = read(r + i - 3, z + i - 3);
+    file[3] = read(r + i - 3, z - i + 3);
+
+    for(int j = 0; j < 4; j++) {
+      /* Initialize the first time through */
+      if(i == 0) {
+        color_counter[j] = 0;
+        shape_counter[j] = 0;
+        prev_color[j] = 0xC0;
+        prev_shape[j] = 0x0C;
+      }
+
+      /* Trap Null references */
+      if(!file[j]) {
+        color_counter[j] = 0;
+        shape_counter[j] = 0;
+        prev_shape[j]    = 0x0C;
+        prev_color[j]    = 0xC0;
+      } else {
+        if((*file[j] & 0xF0) == prev_color[j])
+          color_counter[j]++;
+        else
+          color_counter[j] = 1;
+
+        prev_color[j] = *file[j] & 0xF0;
+
+        if((*file[j] & 0x0F) == prev_shape[j])
+          shape_counter[j]++;
+        else
+          shape_counter[j] = 1;
+
+        prev_shape[j] = *file[j] & 0x0F;
+      }
+
+      if(shape_counter[j] == 4 || color_counter[j] == 4) return STATUS_VICTORY;
+    }
   }
-
-  /* Check Down */
-  if(_check_aux(column) || _check_aux(row) || _check_aux(diag1) || _check_aux(diag2)) return STATUS_VICTORY;
 
   /* Check for cat */
   if(_moves == 6 * _NUMPOLES) return STATUS_CAT;

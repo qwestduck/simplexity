@@ -27,7 +27,6 @@ public:
   void     reset();
 private:
   Pole* _poles;
-  bool _check_aux(piece_t** file);
   int _recentMove;
   int _moves;
   static const int _NUMPOLES = 7;
