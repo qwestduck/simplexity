@@ -1,6 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "board.h"
 #include "player.h"
 
 typedef int player_t;
@@ -13,8 +14,9 @@ public:
   int moves();
 protected:
   virtual void init() = 0;
-  Player* p1;
-  Player* p2;
+  Board* _board;
+  Player* _p1;
+  Player* _p2;
   player_t _winner;
   int _moves;
 };

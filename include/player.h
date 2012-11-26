@@ -4,9 +4,12 @@
 #include "board.h"
 
 typedef int color_t;
+#define PLAYER_RED   0
+#define PLAYER_WHITE 1
 
 class Player {
 public:
+  Player();
   Player(Board* board, color_t color);
   virtual status_t move() = 0;
 protected:
@@ -18,6 +21,7 @@ protected:
 
 class RandomPlayer : public Player {
 public:
+  RandomPlayer(Board* board, color_t color);
   status_t move();
 };
 #endif
