@@ -1,5 +1,9 @@
 #include "board.h"
 
+Pole::Pole() {
+  _pieces = new piece_t[_MAXZ];
+}
+
 status_t Pole::drop(piece_t piece) {
   return STATUS_OK;
 }

@@ -10,7 +10,7 @@ public:
   int      getZ();
   piece_t* read(int z);
 private:
-  static const int maxZ = 6;
+  static const int _MAXZ = 6;
 
   int      _z;
   piece_t* _pieces;
@@ -25,6 +25,6 @@ public:
   piece_t* read(int pole, int z);
 private:
   Pole* poles;
-  static const int numPoles = 7;
+  static const int _NUMPOLES = 7;
 };
 #endif
