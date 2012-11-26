@@ -14,6 +14,8 @@ public:
 protected:
   int squaresRemaining;
   int circlesRemaining;
+  static player_t numPlayers;
+  player_t _id;
   color_t _color;
   Board*  _board;
 };
