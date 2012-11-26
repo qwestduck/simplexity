@@ -31,8 +31,16 @@ status_t RandomPlayer::move() {
   while(!moved) {
     int pieceType = rand() % 2;
     int pole = rand() % 7;
-    if(_board->drop((piece_t) (_id << 4) + pieceType, pole) == STATUS_OK)
+    piece_t piece = (piece_t) (_id << 4) + pieceType;
+    if(_board->drop(piece, pole) == STATUS_OK) {
+      if(VERBOSITY_PLAYBYPLAY) {
+        std::cout << "RandomPlayer::move 0x";
+        std::cout << std::setw(2) << std::setfill('0') << std::hex << piece;
+        std::cout << "->" << pole << std::endl;
+      }
+
       moved = true;
+    }
   }
 
   return STATUS_OK;
