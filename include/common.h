@@ -5,12 +5,16 @@ typedef int piece_t;
 typedef int player_t;
 typedef int status_t;
 
-#define PLAYER_RED   0
-#define PLAYER_WHITE 1
+#define PLAYER_WHITE      0
+#define PLAYER_RED        1
 
-#define STATUS_OK    0
-#define STATUS_POLEFULL 1
+#define STATUS_OK         0
+#define STATUS_POLEFULL   1
 
+#define SHAPE_SQUARE      0
+#define SHAPE_CIRCLE      1
+
+/* MSB - PLAYER : LSB - SHAPE */
 #define PIECE_WHITESQUARE 0x00
 #define PIECE_WHITECIRCLE 0x01
 #define PIECE_REDSQUARE   0x10
