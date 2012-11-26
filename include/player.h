@@ -1,7 +1,9 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-typedef color_t int;
+#include "board.h"
+
+typedef int color_t;
 
 class Player {
 public:

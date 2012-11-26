@@ -1,8 +1,8 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-typedef piece_t int;
-typedef status_t int;
+typedef int piece_t;
+typedef int status_t;
 
 class Pole {
 public:
