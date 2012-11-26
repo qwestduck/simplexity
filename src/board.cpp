@@ -25,3 +25,7 @@ Board::Board() {
 status_t Board::drop(piece_t piece, int pole) {
   return _poles[pole].drop(piece);
 }
+
+void Board::reset() {
+  
+}

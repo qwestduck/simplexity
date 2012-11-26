@@ -23,6 +23,7 @@ public:
   int      fitness();
   int      getZ(int pole);
   piece_t* read(int pole, int z);
+  void     reset();
 private:
   Pole* _poles;
   static const int _NUMPOLES = 7;
