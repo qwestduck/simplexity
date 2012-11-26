@@ -1,5 +1,4 @@
 #include "board.h"
-#include <iostream>
 
 Pole::Pole() {
   _pieces = new piece_t[_MAXZ];
