@@ -14,6 +14,7 @@ typedef int status_t;
 
 #define STATUS_OK         0
 #define STATUS_POLEFULL   1
+#define STATUS_BADPOLE    2
 
 #define SHAPE_SQUARE      0
 #define SHAPE_CIRCLE      1
