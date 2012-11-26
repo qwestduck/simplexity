@@ -5,7 +5,14 @@ Game::Game() {
 }
 
 void Game::play() {
+  bool gameOver = false;
+  int player = 0;
 
+  while(!gameOver) {
+    player ? _p2->move() : _p1->move();
+
+    player = 1 - player;
+  }
 }
 
 RvRGame::RvRGame() {
