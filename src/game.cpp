@@ -13,6 +13,14 @@ void Game::play() {
     while(!gameOver) {
       player ? _p2->move() : _p1->move();
 
+      switch(_board->check()) {
+      case STATUS_VICTORY:
+        gameOver = true;
+        break;
+      case STATUS_CAT:
+        gameOver = true;
+        break;
+      }
       player = 1 - player;
     }
 

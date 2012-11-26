@@ -20,12 +20,29 @@ status_t Pole::drop(piece_t piece) {
 
 Board::Board() {
   _poles = new Pole[_NUMPOLES];
+  _moves = 0;
+}
+
+status_t Board::check() {
+  /* Check for victory */
+
+  /* Check for cat */
+  if(_moves == 6 * _NUMPOLES) return STATUS_CAT;
+
+  return STATUS_OK;
 }
 
 status_t Board::drop(piece_t piece, int pole) {
   if(pole < 0 || pole >= _NUMPOLES) return STATUS_BADPOLE;
 
-  return _poles[pole].drop(piece);
+  status_t ret = _poles[pole].drop(piece);
+
+  if(ret == STATUS_OK) {
+    _recentMove = pole;
+    _moves++;
+  }
+
+  return ret;
 }
 
 void Board::reset() {
