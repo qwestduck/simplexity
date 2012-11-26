@@ -24,6 +24,10 @@ piece_t* Pole::read(int z) {
   return &_pieces[z];
 }
 
+void Pole::reset() {
+  _z = 0;
+}
+
 Board::Board() {
   _poles = new Pole[_NUMPOLES];
   _moves = 0;
@@ -106,5 +110,8 @@ piece_t* Board::read(int pole, int z) {
 }
 
 void Board::reset() {
+  _moves = 0;
 
+  for(int i = 0; i < _NUMPOLES; i++)
+    _poles[i].reset();
 }

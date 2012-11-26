@@ -9,6 +9,7 @@ public:
   status_t drop(piece_t piece);
   int      getZ();
   piece_t* read(int z);
+  void     reset();
 private:
   static const int _MAXZ = 6;
 
