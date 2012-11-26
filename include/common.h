@@ -21,7 +21,7 @@ typedef int status_t;
 #define SHAPE_SQUARE      0
 #define SHAPE_CIRCLE      1
 
-#define VERBOSITY_PLAYBYPLAY true
+#define VERBOSITY_PLAYBYPLAY false
 
 /* MSB - PLAYER : LSB - SHAPE */
 #define PIECE_WHITESQUARE 0x00

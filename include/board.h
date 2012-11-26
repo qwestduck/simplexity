@@ -24,6 +24,7 @@ public:
   status_t drop(piece_t piece, int pole);
   int      fitness();
   int      getZ(int pole);
+  int      getMoves();
   piece_t* read(int pole, int z);
   void     reset();
 private:

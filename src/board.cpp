@@ -103,6 +103,10 @@ status_t Board::drop(piece_t piece, int pole) {
   return ret;
 }
 
+int Board::getMoves() {
+  return _moves;
+}
+
 piece_t* Board::read(int pole, int z) {
   if(pole < 0 || pole > _NUMPOLES) return NULL;
 
