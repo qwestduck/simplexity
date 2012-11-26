@@ -5,6 +5,11 @@ Game::Game() {
 }
 
 void Game::play() {
+  int cats = 0;
+  int wins[2];
+  wins[0] = 0;
+  wins[1] = 0;
+
   for(int i = 0; i < _MAXGAMES; i++) {
     bool gameOver = false;
     int player = i % 2;
@@ -15,10 +20,12 @@ void Game::play() {
       switch(_board->check()) {
       case STATUS_VICTORY:
         std::cout << "Victory: Player " << player << ", Moves: " << _board->getMoves() << std::endl;
+        wins[player]++;
         gameOver = true;
         break;
       case STATUS_CAT:
         std::cout << "CAT, Moves: " << _board->getMoves() << std::endl;
+        cats++;
         gameOver = true;
         break;
       }
@@ -29,6 +36,8 @@ void Game::play() {
     gameOver = false;
     _board->reset();
   }
+
+  std::cout << "Player 0: " << wins[0] << ", Player 1: " << wins[1] << std::endl;
 }
 
 RvRGame::RvRGame() {
