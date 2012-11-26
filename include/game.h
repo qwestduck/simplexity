@@ -1,7 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 
-typedef player_t int;
+typedef int player_t;
 
 class Game {
 public:
