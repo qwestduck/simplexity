@@ -37,7 +37,18 @@ void Game::play() {
     _board->reset();
   }
 
-  std::cout << "Player 0: " << wins[0] << ", Player 1: " << wins[1] << std::endl;
+  std::cout << "Player 0: " << wins[0] << ", Player 1: " << wins[1] << ", CATS: " << cats << std::endl;
+  if(wins[0] > wins[1]) {
+    std::cout << "Player 0 won more games" << std::endl;
+  }
+
+  if(wins[0] < wins[1]) {
+    std::cout << "Player 1 won more games" << std::endl;
+  }
+
+  if(wins[0] == wins[1]) {
+    std::cout << "The players won the same number of games" << std::endl;
+  }
 }
 
 RvRGame::RvRGame() {
