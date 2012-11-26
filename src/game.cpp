@@ -4,6 +4,10 @@ Game::Game() {
 
 }
 
+void Game::play() {
+
+}
+
 RvRGame::RvRGame() {
 
 }
