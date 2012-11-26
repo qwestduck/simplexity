@@ -20,6 +20,9 @@ RandomPlayer::RandomPlayer(Board* board, color_t color) {
     srand(time(NULL));
     _seeded = true;
   }
+
+  _board = board;
+  _color = color;
 }
 
 status_t RandomPlayer::move() {

@@ -17,6 +17,7 @@ void Game::play() {
 
 RvRGame::RvRGame() {
   _board = new Board();
+  init();
 }
 
 void RvRGame::init() {

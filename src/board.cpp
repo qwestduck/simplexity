@@ -1,8 +1,13 @@
 #include "board.h"
+#include <iostream>
 
 Pole::Pole() {
   _pieces = new piece_t[_MAXZ];
   _z = 0;
+}
+
+int Pole::getZ() {
+  return _z;
 }
 
 status_t Pole::drop(piece_t piece) {
@@ -15,9 +20,9 @@ status_t Pole::drop(piece_t piece) {
 }
 
 Board::Board() {
-
+  _poles = new Pole[_NUMPOLES];
 }
 
 status_t Board::drop(piece_t piece, int pole) {
-  return poles[pole].drop(piece);
+  return _poles[pole].drop(piece);
 }
