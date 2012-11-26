@@ -29,29 +29,43 @@ Board::Board() {
   _moves = 0;
 }
 
-bool Board::_check_aux(piece_t* p1, piece_t* p2, piece_t* p3, piece_t* p4) {
-  if(!p1 || !p2 || !p3 || !p4) return false;
+bool Board::_check_aux(piece_t** file) {
+  int and_check = 0xFF;
+  int or_check  = 0x00;
 
-  int and_check;
-  int or_check;
+  for(int i = 0; i < 4; i++) {
+    for(int j = 0; j < 4; j++)
+      if(!*(file + i + j)) return false;
 
-  and_check = *p1 & *p1 & *p2 & *p3;
-  or_check  = *p1 | *p1 | *p2 | *p3;
+    for(int j = 0; j < 4; j++) {
+      and_check &= **(file + i + j);
+      or_check  |= **(file + i + j);
+    }
 
-  return ((and_check & 0xF0) == (or_check & 0xF0)) || ((and_check & 0x0F) == (or_check & 0x0F));
+    if(((and_check & 0xF0) == (or_check & 0xF0)) || ((and_check & 0x0F) == (or_check & 0x0F))) return true;
+  }
+
+  return false;
 }
 
 status_t Board::check() {
-  int z = _poles[_recentMove].getZ();
+  int r = _recentMove;
+  int z = _poles[_recentMove].getZ() - 1;
 
-  /* Check for victory */
-  piece_t* zd0 = read(_recentMove, z - 1);
-  piece_t* zd1 = read(_recentMove, z - 2);
-  piece_t* zd2 = read(_recentMove, z - 3);
-  piece_t* zd3 = read(_recentMove, z - 4);
+  piece_t* column[7];
+  piece_t* row[7];
+  piece_t* diag1[7];
+  piece_t* diag2[7];
+
+  for(int i = -3; i <= 3; i++) {
+    column[i + 3] = read(r, z + i);
+    row[i + 3]    = read(r + i, z);
+    diag1[i + 3]  = read(r + i, z + i);
+    diag2[i + 3]  = read(r + i, z - i);
+  }
 
   /* Check Down */
-  if(_check_aux(zd0, zd1, zd2, zd3)) return STATUS_VICTORY;
+  if(_check_aux(column) || _check_aux(row) || _check_aux(diag1) || _check_aux(diag2)) return STATUS_VICTORY;
 
   /* Check for cat */
   if(_moves == 6 * _NUMPOLES) return STATUS_CAT;

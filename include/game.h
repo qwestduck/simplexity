@@ -26,7 +26,7 @@ protected:
 class RvRGame : public Game {
 public:
   RvRGame();
-protected:
+private:
   void init();
 };
 #endif

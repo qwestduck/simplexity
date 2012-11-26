@@ -2,13 +2,12 @@
 
 Game::Game() {
   _board = new Board();
-  _gameID = 0;
 }
 
 void Game::play() {
-  for(; _gameID < _MAXGAMES; _gameID++) {
+  for(int i = 0; i < _MAXGAMES; i++) {
     bool gameOver = false;
-    int player = _gameID % 2;
+    int player = i % 2;
 
     while(!gameOver) {
       player ? _p2->move() : _p1->move();
