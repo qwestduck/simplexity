@@ -14,12 +14,14 @@ void Game::play() {
 
       switch(_board->check()) {
       case STATUS_VICTORY:
+        std::cout << "Victory: Player " << player << std::endl;
         gameOver = true;
         break;
       case STATUS_CAT:
         gameOver = true;
         break;
       }
+
       player = 1 - player;
     }
 
