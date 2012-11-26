@@ -38,7 +38,7 @@ bool Board::_check_aux(piece_t* p1, piece_t* p2, piece_t* p3, piece_t* p4) {
   and_check = *p1 & *p1 & *p2 & *p3;
   or_check  = *p1 | *p1 | *p2 | *p3;
 
-  return ((and_check >> 4) == (or_check >> 4)) || ((and_check & 0x0F) == (or_check & 0x0F));
+  return ((and_check & 0xF0) == (or_check & 0xF0)) || ((and_check & 0x0F) == (or_check & 0x0F));
 }
 
 status_t Board::check() {
