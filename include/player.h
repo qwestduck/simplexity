@@ -25,4 +25,10 @@ public:
   RandomPlayer(Board* board, color_t color);
   status_t move();
 };
+
+class SmartPlayer : public Player {
+public:
+  SmartPlayer(Board* board, color_t color);
+  status_t move();
+};
 #endif
