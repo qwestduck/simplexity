@@ -9,6 +9,8 @@ typedef int piece_t;
 typedef int player_t;
 typedef int status_t;
 
+#define INFINITY          65536
+
 #define PLAYER_WHITE      0
 #define PLAYER_RED        1
 
@@ -20,6 +22,8 @@ typedef int status_t;
 
 #define SHAPE_SQUARE      0
 #define SHAPE_CIRCLE      1
+
+#define ALPHABETA_DEPTH   4
 
 #define VERBOSITY_PLAYBYPLAY false
 

@@ -1,7 +1,7 @@
 #include "game.h"
 
 int main() {
-  RvRGame g;
+  RvSGame g;
   g.play();
   return 0;
 }

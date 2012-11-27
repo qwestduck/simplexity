@@ -30,5 +30,7 @@ class SmartPlayer : public Player {
 public:
   SmartPlayer(Board* board, color_t color);
   status_t move();
+private:
+  int alphabeta(Board* board, int depth, int a, int B, bool isMax);
 };
 #endif

@@ -90,12 +90,12 @@ status_t Board::check() {
   return STATUS_OK;
 }
 
-status_t Board::drop(piece_t piece, int pole) {
+status_t Board::drop(piece_t piece, int pole, bool dry) {
   if(pole < 0 || pole >= _NUMPOLES) return STATUS_BADPOLE;
 
   status_t ret = _poles[pole].drop(piece);
 
-  if(ret == STATUS_OK) {
+  if(ret == STATUS_OK && !dry) {
     _recentMove = pole;
     _moves++;
   }

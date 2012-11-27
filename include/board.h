@@ -21,7 +21,7 @@ class Board {
 public:
   Board();
   status_t check();
-  status_t drop(piece_t piece, int pole);
+  status_t drop(piece_t piece, int pole, bool dry = false);
   int      fitness();
   int      getZ(int pole);
   int      getMoves();

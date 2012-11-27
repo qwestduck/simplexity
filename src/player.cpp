@@ -52,5 +52,30 @@ SmartPlayer::SmartPlayer(Board* board, color_t color) {
 }
 
 status_t SmartPlayer::move() {
+  alphabeta(_board, ALPHABETA_DEPTH, -INFINITY, INFINITY, true);
+
   return STATUS_OK;
 }
+
+int SmartPlayer::alphabeta(Board* node, int depth, int a, int B, bool isMax) {
+/*  if(depth = 0 || node is a terminal node)
+    return the heuristic value of node
+  if(isMax) {
+    for(each child of node) {
+      a = max(a, alphabeta(child, depth - 1, a, B, !isMax));
+      if(B <= a) break;
+    }
+
+    return a;
+  } else {
+    for(each child of node) {
+      B = min(B, alphabeta(child, depth - 1, a, B, !isMax));
+      if(B <= a) break;
+    }
+
+    return B;
+  }*/
+
+  return 0;
+}
+
