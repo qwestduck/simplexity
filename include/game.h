@@ -29,4 +29,11 @@ public:
 private:
   void init();
 };
+
+class RvSGame : public Game {
+public:
+  RvSGame();
+private:
+  void init();
+};
 #endif
