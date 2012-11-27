@@ -16,7 +16,8 @@ typedef int status_t;
 
 #define STATUS_OK         0
 #define STATUS_POLEFULL   1
-#define STATUS_BADPOLE    2
+#define STATUS_POLEEMPTY  2
+#define STATUS_BADPOLE    3
 #define STATUS_VICTORY    1
 #define STATUS_CAT        2
 

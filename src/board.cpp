@@ -18,6 +18,14 @@ status_t Pole::drop(piece_t piece) {
   return STATUS_OK;
 }
 
+status_t Pole::undrop() {
+  if(_z == 0) return STATUS_POLEEMPTY;
+
+  _z--;
+
+  return STATUS_OK;
+}
+
 piece_t* Pole::read(int z) {
   if(z < 0 || z >= _z) return NULL;
 
@@ -101,6 +109,15 @@ status_t Board::drop(piece_t piece, int pole, bool dry) {
   }
 
   return ret;
+}
+
+status_t Board::undrop(int pole) {
+  if(pole < 0 || pole >= _NUMPOLES) return STATUS_BADPOLE;
+
+  status_t ret = _poles[pole].undrop();
+
+  return ret;
+
 }
 
 int Board::getMoves() {

@@ -57,7 +57,7 @@ status_t SmartPlayer::move() {
   return STATUS_OK;
 }
 
-int SmartPlayer::alphabeta(Board* node, int depth, int a, int B, bool isMax) {
+int SmartPlayer::alphabeta(Board* board, int depth, int a, int B, bool isMax) {
 /*  if(depth = 0 || node is a terminal node)
     return the heuristic value of node
   if(isMax) {

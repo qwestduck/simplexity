@@ -7,6 +7,7 @@ class Pole {
 public:
   Pole();
   status_t drop(piece_t piece);
+  status_t undrop();
   int      getZ();
   piece_t* read(int z);
   void     reset();
@@ -22,6 +23,7 @@ public:
   Board();
   status_t check();
   status_t drop(piece_t piece, int pole, bool dry = false);
+  status_t undrop(int pole);
   int      fitness();
   int      getZ(int pole);
   int      getMoves();
