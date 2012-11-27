@@ -45,3 +45,12 @@ status_t RandomPlayer::move() {
 
   return STATUS_OK;
 }
+
+SmartPlayer::SmartPlayer(Board* board, color_t color) {
+  _board = board;
+  _color = color;
+}
+
+status_t SmartPlayer::move() {
+  return STATUS_OK;
+}

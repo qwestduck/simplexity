@@ -59,3 +59,12 @@ void RvRGame::init() {
   _p1 = new RandomPlayer(_board, PLAYER_RED);
   _p2 = new RandomPlayer(_board, PLAYER_WHITE);
 }
+
+RvSGame::RvSGame() {
+  init();
+}
+
+void RvSGame::init() {
+  _p1 = new RandomPlayer(_board, PLAYER_RED);
+  _p2 = new SmartPlayer(_board, PLAYER_WHITE);
+}
