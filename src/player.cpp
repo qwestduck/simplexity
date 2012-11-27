@@ -58,24 +58,30 @@ status_t SmartPlayer::move() {
 }
 
 int SmartPlayer::alphabeta(Board* board, int depth, int a, int B, bool isMax) {
-/*  if(depth = 0 || node is a terminal node)
-    return the heuristic value of node
+  if(depth == 0/* || node is a terminal node*/)
+    return /*the heuristic value of node*/ 0;
   if(isMax) {
-    for(each child of node) {
-      a = max(a, alphabeta(child, depth - 1, a, B, !isMax));
-      if(B <= a) break;
+    for(int i = 0; i < 7; i++) {
+      for(int pieceType = 0; pieceType < 2; pieceType++) {
+        if(_board->drop((piece_t) (_id << 4) + pieceType, i, true) != STATUS_OK) continue;
+        a = std::max(a, alphabeta(_board, depth - 1, a, B, !isMax));
+        _board->undrop(i);
+        if(B <= a) return a;
+      }
     }
 
     return a;
   } else {
-    for(each child of node) {
-      B = min(B, alphabeta(child, depth - 1, a, B, !isMax));
-      if(B <= a) break;
+    for(int i = 0; i < 7; i++) {
+      for(int pieceType = 0; pieceType < 2; pieceType++) {
+        if(_board->drop((piece_t) (_id << 4) + pieceType, i, true) != STATUS_OK) continue;
+        B = std::min(B, alphabeta(_board, depth - 1, a, B, !isMax));
+        _board->undrop(i);
+        if(B <= a) return B;
+      }
     }
 
     return B;
-  }*/
-
-  return 0;
+  }
 }
 
