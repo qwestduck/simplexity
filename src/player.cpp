@@ -1,6 +1,7 @@
 #include "player.h"
 #include <ctime>
 #include <cstdlib>
+#include <vector>
 
 bool _seeded = false;
 
@@ -52,7 +53,35 @@ SmartPlayer::SmartPlayer(Board* board, color_t color) {
 }
 
 status_t SmartPlayer::move() {
-  alphabeta(_board, ALPHABETA_DEPTH, -INFINITY, INFINITY, true);
+  int best_moves[7];
+  piece_t best_piece[7];
+  int array_size = 0;
+  int piece;
+  int a = -INFINITY;
+  int ab = a;
+  int B = INFINITY;
+  bool isMax = true;
+  int depth = ALPHABETA_DEPTH - 1;
+
+  /* Unroll the first level of alphabeta */
+  for(int i = 0; i < 7; i++) {
+    for(int pieceType = 0; pieceType < 2; pieceType++) {
+      piece = (piece_t) (_id << 4) + pieceType;
+      if(_board->drop(piece, i, true) != STATUS_OK) continue;
+      a = std::max(a, alphabeta(_board, depth - 1, a, B, !isMax));
+      if(ab > a) {
+        array_size = 0;
+      }
+      if(ab >= a) {
+        best_moves[array_size] = i;
+        best_piece[array_size] = piece;
+        array_size++;
+      }
+      _board->undrop(i);
+    }
+  }
+
+  _board->drop(best_piece[0], best_moves[0]);
 
   return STATUS_OK;
 }
