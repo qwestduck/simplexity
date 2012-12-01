@@ -42,8 +42,9 @@ Board::Board() {
 }
 
 status_t Board::check() {
-  int r = _recentMove;
-  int z = _poles[_recentMove].getZ() - 1;
+  if(_moves == 0 || _moves > 42) return STATUS_OK;
+  int r = _recentMove[_moves - 1];
+  int z = _poles[r].getZ() - 1;
 
   int* file[4];
   int color_counter[4];
@@ -92,19 +93,18 @@ status_t Board::check() {
     }
   }
 
-  /* Check for cat */
-  if(_moves == 6 * _NUMPOLES) return STATUS_CAT;
+  if(_moves == 42) return STATUS_CAT;
 
   return STATUS_OK;
 }
 
-status_t Board::drop(piece_t piece, int pole, bool dry) {
-  if(pole < 0 || pole >= _NUMPOLES) return STATUS_BADPOLE;
+status_t Board::drop(piece_t piece, int pole) {
+  if(pole < 0 || pole >= _NUMPOLES || _moves >= 42) return STATUS_BADPOLE;
 
   status_t ret = _poles[pole].drop(piece);
 
-  if(ret == STATUS_OK && !dry) {
-    _recentMove = pole;
+  if(ret == STATUS_OK) {
+    _recentMove[_moves] = pole;
     _moves++;
   }
 
@@ -112,9 +112,10 @@ status_t Board::drop(piece_t piece, int pole, bool dry) {
 }
 
 status_t Board::undrop(int pole) {
-  if(pole < 0 || pole >= _NUMPOLES) return STATUS_BADPOLE;
+  if(pole < 0 || pole >= _NUMPOLES || _moves <= 0) return STATUS_BADPOLE;
 
   status_t ret = _poles[pole].undrop();
+  _moves--;
 
   return ret;
 

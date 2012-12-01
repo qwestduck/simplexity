@@ -22,7 +22,7 @@ class Board {
 public:
   Board();
   status_t check();
-  status_t drop(piece_t piece, int pole, bool dry = false);
+  status_t drop(piece_t piece, int pole);
   status_t undrop(int pole);
   int      fitness();
   int      getZ(int pole);
@@ -31,7 +31,7 @@ public:
   void     reset();
 private:
   Pole* _poles;
-  int _recentMove;
+  int _recentMove[43];
   int _moves;
   static const int _NUMPOLES = 7;
 };

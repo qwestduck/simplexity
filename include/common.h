@@ -26,7 +26,7 @@ typedef int status_t;
 
 #define ALPHABETA_DEPTH   4
 
-#define VERBOSITY_PLAYBYPLAY false
+#define VERBOSITY_PLAYBYPLAY true
 
 /* MSB - PLAYER : LSB - SHAPE */
 #define PIECE_WHITESQUARE 0x00
