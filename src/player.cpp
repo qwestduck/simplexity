@@ -8,20 +8,16 @@ bool _seeded = false;
 int Player::numPlayers = 0;
 
 Player::Player() {
-  _id = numPlayers;
-  numPlayers++;
-}
-
-Player::Player(Board* board, color_t color) {
-
-}
-
-RandomPlayer::RandomPlayer(Board* board, color_t color) {
   if(!_seeded) {
     srand(time(NULL));
     _seeded = true;
   }
 
+  _id = numPlayers;
+  numPlayers++;
+}
+
+RandomPlayer::RandomPlayer(Board* board, color_t color) {
   _board = board;
   _color = color;
 }
@@ -53,7 +49,7 @@ SmartPlayer::SmartPlayer(Board* board, color_t color) {
 status_t SmartPlayer::move() {
   int best_moves[14];
   piece_t best_piece[14];
-  int array_size = 0;
+  int array_size;
   int piece;
   int a = -INFINITY;
   int ab = a;
@@ -62,6 +58,7 @@ status_t SmartPlayer::move() {
   bool isMax = true;
   int depth = ALPHABETA_DEPTH;
 
+  array_size = 0;
   /* Unroll the first level of alphabeta */
   for(int i = 0; i < 7; i++) {
     for(int pieceType = 0; pieceType < 2; pieceType++) {
@@ -76,17 +73,19 @@ status_t SmartPlayer::move() {
         best_piece[array_size] = piece;
         array_size++;
       }
-//      std::cout << "a = " << a << " : ab = " << ab << std::endl;
       a = std::max(a, ab);
       _board->undrop(i);
     }
   }
 
-  if(array_size == 0) return STATUS_OK;
+  // if(array_size == 0) return STATUS_OK;
+
+  int random_index = rand() % array_size;
 
   if(VERBOSITY_PLAYBYPLAY)
-    std::cout << "Smart player: " << _board->getMoves() << " " << ((best_piece[0] == 0) ? "Square" : "Circle") << " on pole " << best_moves[0] << " of " << array_size << " options" << std::endl;
-  _board->drop(best_piece[0], best_moves[0]);
+    std::cout << "Smart player: " << ((best_piece[random_index] == 0) ? "Square" : "Circle") << " on pole " << best_moves[random_index] << std::endl;
+
+  _board->drop(best_piece[random_index], best_moves[random_index]);
 
   return STATUS_OK;
 }
@@ -94,8 +93,7 @@ status_t SmartPlayer::move() {
 int SmartPlayer::alphabeta(Board* board, int depth, int a, int B, bool isMax) {
   status_t game_status = _board->check();
   if(game_status == STATUS_VICTORY) {
-    //return INFINITY;
-    return isMax ? INFINITY : -INFINITY;
+    return isMax ? -INFINITY : INFINITY;
   }
   if(game_status == STATUS_CAT)
     return -1;

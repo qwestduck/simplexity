@@ -68,3 +68,13 @@ void RvSGame::init() {
   _p1 = new RandomPlayer(_board, PLAYER_RED);
   _p2 = new SmartPlayer(_board, PLAYER_WHITE);
 }
+
+SvSGame::SvSGame() {
+  init();
+}
+
+void SvSGame::init() {
+  _p1 = new SmartPlayer(_board, PLAYER_RED);
+  _p2 = new SmartPlayer(_board, PLAYER_WHITE);
+}
+

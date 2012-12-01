@@ -36,4 +36,11 @@ public:
 private:
   void init();
 };
+
+class SvSGame : public Game {
+public:
+  SvSGame();
+private:
+  void init();
+};
 #endif
